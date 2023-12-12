@@ -16,6 +16,7 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Date;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 
@@ -47,25 +48,53 @@ public class DogServiceUnitTest {
         DogResponse dogResponse = dogService.createDog(dogRequest);
         Assertions.assertNotNull(dogResponse);
 
+        Assertions.assertEquals(dogEntity.getId(), dogResponse.getId());
         Assertions.assertEquals("DogName", dogResponse.getName());
         Assertions.assertEquals(3, dogResponse.getAge());
         Assertions.assertEquals("Black", dogResponse.getColor());
         Assertions.assertEquals(AnimalGender.MALE, dogResponse.getGender());
         Assertions.assertEquals(DogSize.GRANDE, dogResponse.getSize());
-
-
-
     }
 
-        @Test
-        void getDogs() {
+    @Test
+    public void shouldThrowException_whenDogNameIsNullorEmpty(){
+        DogRequest dogRequestEmptyName = new DogRequest();
+        dogRequestEmptyName.setName("");
+
+        DogRequest dogRequestNullName = new DogRequest();
+        dogRequestNullName.setName(null);
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> dogService.createDog(dogRequestEmptyName),
+                "Should throw exception for empty name");
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> dogService.createDog(dogRequestNullName),
+                "Should throw exception for null name");
+
+        Mockito.verify(dogRepository, Mockito.never()).save(Mockito.any());
+    }
+
+
+
+    @Test
+    void getDogs() {
 
 
     }
 
     @Test
-    void getDogById() {
-    }
+    public void shouldReturnNull_whenIdDoesNotExist() {
+        Mockito.when(dogRepository.findDogById(Mockito.anyInt())).thenReturn(null);
+
+        int mockId = 1234;
+
+        DogResponse found = dogService.getDogById(mockId);
+
+        Assertions.assertNull(found);
+
+        }
+
 
     @Test
     void getDogByName() {
@@ -84,7 +113,11 @@ public class DogServiceUnitTest {
     }
 
     @Test
-    void updateDog() {
+    public void shouldKeepId_whenUpdated() {
+
+
+
+
     }
 
     @Test

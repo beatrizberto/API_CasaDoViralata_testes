@@ -19,6 +19,12 @@ public class DogService {
     DogRepository dogRepository;
 
     public DogResponse createDog(DogRequest dogRequest) {
+
+        String dogName = dogRequest.getName();
+        if (dogName == null || dogName.isEmpty()) {
+            throw new IllegalArgumentException("Name não pode ser nulo ou vazio");
+        }
+
         Dog dogEntity = dogRepository.save(DogConvert.toEntity(dogRequest));
         return DogConvert.toResponse(dogEntity);
     }
@@ -31,10 +37,13 @@ public class DogService {
     }
 
     public DogResponse getDogById(Integer id) {
-        return DogConvert.toResponse(dogRepository.findById(id).get());
+        Dog dog = dogRepository.findDogById(id);
+        return dog != null ? DogConvert.toResponse(dog) : null;
+
     }
 
     public DogResponse getDogByName(String name) {
+
         return DogConvert.toResponse(dogRepository.findByName(name));
     }
 
