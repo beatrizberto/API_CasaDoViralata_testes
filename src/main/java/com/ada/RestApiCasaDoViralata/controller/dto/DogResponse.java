@@ -13,7 +13,6 @@ public class DogResponse {
     private String name;
     private Integer age;
     private String color;
-    private Date admissionDate;
     private AnimalGender gender;
     private DogSize size;
 

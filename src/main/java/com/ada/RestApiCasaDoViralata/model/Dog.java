@@ -3,6 +3,7 @@ package com.ada.RestApiCasaDoViralata.model;
 import com.ada.RestApiCasaDoViralata.utils.AnimalGender;
 import com.ada.RestApiCasaDoViralata.utils.DogSize;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,16 +23,15 @@ public class Dog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank(message = "O nome não pode ser nulo ou vazio")
+    @Column (nullable = false)
     private String name;
 
     private Integer age;
 
     private String color;
 
-    @Column(name = "Entrada")
-    private Date admissionDate;
-
-    @Column(nullable = false)
+    @Column(name = "Sexo")
     private AnimalGender gender;
 
     @Column(name = "porte")

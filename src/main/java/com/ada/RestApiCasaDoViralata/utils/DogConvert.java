@@ -16,7 +16,6 @@ public class DogConvert {
         dog.setName(dogRequest.getName());
         dog.setAge(dogRequest.getAge());
         dog.setColor(dogRequest.getColor());
-        dog.setAdmissionDate(dogRequest.getAdmissionDate());
         dog.setGender(dogRequest.getGender());
         dog.setSize(dogRequest.getSize());
 
@@ -29,7 +28,6 @@ public class DogConvert {
         dogResponse.setName(dog.getName());
         dogResponse.setAge(dog.getAge());
         dogResponse.setColor(dog.getColor());
-        dogResponse.setAdmissionDate(dog.getAdmissionDate());
         dogResponse.setGender(dog.getGender());
         dogResponse.setSize(dog.getSize());
 

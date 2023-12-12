@@ -2,8 +2,6 @@ package com.ada.RestApiCasaDoViralata.controller;
 
 import com.ada.RestApiCasaDoViralata.controller.dto.DogRequest;
 import com.ada.RestApiCasaDoViralata.controller.dto.DogResponse;
-import com.ada.RestApiCasaDoViralata.controller.dto.UserRequest;
-import com.ada.RestApiCasaDoViralata.controller.dto.UserResponse;
 import com.ada.RestApiCasaDoViralata.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,7 +36,7 @@ public class DogController {
 
     @PostMapping
     public ResponseEntity<DogResponse> saveDog(@RequestBody DogRequest dogRequest) {
-        DogResponse dog = dogService.saveDog(dogRequest);
+        DogResponse dog = dogService.createDog(dogRequest);
         return ResponseEntity.created(URI.create("/dog/" + dog.getId())).body(dog);
 
     }
