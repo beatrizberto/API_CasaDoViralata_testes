@@ -57,7 +57,7 @@ public class DogServiceUnitTest {
     }
 
     @Test
-    public void shouldThrowException_whenDogNameIsNullorEmpty(){
+    public void createDog_shouldThrowException_whenDogNameIsNullorEmpty() {
         DogRequest dogRequestEmptyName = new DogRequest();
         dogRequestEmptyName.setName("");
 
@@ -76,7 +76,6 @@ public class DogServiceUnitTest {
     }
 
 
-
     @Test
     void getDogs() {
 
@@ -84,7 +83,7 @@ public class DogServiceUnitTest {
     }
 
     @Test
-    public void shouldReturnNull_whenIdDoesNotExist() {
+    public void getDogById_shouldReturnNull_whenIdDoesNotExist() {
         Mockito.when(dogRepository.findDogById(Mockito.anyInt())).thenReturn(null);
 
         int mockId = 1234;
@@ -93,29 +92,19 @@ public class DogServiceUnitTest {
 
         Assertions.assertNull(found);
 
-        }
-
-
-    @Test
-    void getDogByName() {
     }
 
-    @Test
-    void getDogByColor() {
-    }
 
     @Test
-    void getDogByGender() {
-    }
+    public void updateDog_shouldThrowException_whenDogDoesNotExist() {
+        Mockito.when(dogRepository.findDogById(Mockito.anyInt())).thenReturn(null);
 
-    @Test
-    void getDogBySize() {
-    }
+        DogRequest dogRequest = new DogRequest();
+        dogRequest.setName("DifferentName");
 
-    @Test
-    public void shouldKeepId_whenUpdated() {
-
-
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> dogService.updateDog(1, dogRequest),
+                "Should throw exception for non-existent Dog ID");
 
 
     }

@@ -42,28 +42,34 @@ public class DogService {
 
     }
 
-    public DogResponse getDogByName(String name) {
-
-        return DogConvert.toResponse(dogRepository.findByName(name));
-    }
-
-    public DogResponse getDogByColor(String color) {
-        return DogConvert.toResponse(dogRepository.findByColor(color).get());
-    }
-
-    public DogResponse getDogByGender(AnimalGender gender) {
-        return DogConvert.toResponse(dogRepository.findByGender(gender).get());
-    }
-
-    public DogResponse getDogBySize(DogSize size) {
-        return DogConvert.toResponse(dogRepository.findBySize(size).get());
-    }
+//    public DogResponse getDogByName(String name) {
+//
+//        return DogConvert.toResponse(dogRepository.findByName(name));
+//    }
+//
+//    public DogResponse getDogByColor(String color) {
+//        return DogConvert.toResponse(dogRepository.findByColor(color).get());
+//    }
+//
+//    public DogResponse getDogByGender(AnimalGender gender) {
+//        return DogConvert.toResponse(dogRepository.findByGender(gender).get());
+//    }
+//
+//    public DogResponse getDogBySize(DogSize size) {
+//        return DogConvert.toResponse(dogRepository.findBySize(size).get());
+//    }
 
 
     public DogResponse updateDog(Integer id, DogRequest dogRequest) {
-        Dog dog = DogConvert.toEntity(dogRequest);
-        dog.setId(id);
-        return DogConvert.toResponse(dogRepository.save(dog));
+        Dog existingDog = dogRepository.findDogById(id);
+        if (existingDog == null) {
+            throw new IllegalArgumentException("Dog not found for ID: " + id);
+        } else {
+            existingDog = DogConvert.toEntity(dogRequest);
+            existingDog.setId(id);
+           }
+        return DogConvert.toResponse(dogRepository.save(existingDog));
+
     }
 
     public void deleteDog (Integer id){
