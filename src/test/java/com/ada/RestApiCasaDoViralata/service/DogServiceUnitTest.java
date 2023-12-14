@@ -15,9 +15,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Date;
-import java.util.Optional;
-
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(SpringExtension.class)
@@ -40,7 +37,7 @@ public class DogServiceUnitTest {
         dogRequest.setAge(3);
         dogRequest.setColor("Black");
         dogRequest.setGender(AnimalGender.MALE);
-        dogRequest.setSize(DogSize.GRANDE);
+        dogRequest.setSize(DogSize.BIG);
 
         Dog dogEntity = DogConvert.toEntity(dogRequest);
         Mockito.when(dogRepository.save(any())).thenReturn(dogEntity);
@@ -53,7 +50,7 @@ public class DogServiceUnitTest {
         Assertions.assertEquals(3, dogResponse.getAge());
         Assertions.assertEquals("Black", dogResponse.getColor());
         Assertions.assertEquals(AnimalGender.MALE, dogResponse.getGender());
-        Assertions.assertEquals(DogSize.GRANDE, dogResponse.getSize());
+        Assertions.assertEquals(DogSize.BIG, dogResponse.getSize());
     }
 
     @Test

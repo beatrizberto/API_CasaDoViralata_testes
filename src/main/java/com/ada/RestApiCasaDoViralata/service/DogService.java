@@ -4,9 +4,7 @@ import com.ada.RestApiCasaDoViralata.controller.dto.DogRequest;
 import com.ada.RestApiCasaDoViralata.controller.dto.DogResponse;
 import com.ada.RestApiCasaDoViralata.model.Dog;
 import com.ada.RestApiCasaDoViralata.repository.DogRepository;
-import com.ada.RestApiCasaDoViralata.utils.AnimalGender;
 import com.ada.RestApiCasaDoViralata.utils.DogConvert;
-import com.ada.RestApiCasaDoViralata.utils.DogSize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,28 +40,10 @@ public class DogService {
 
     }
 
-//    public DogResponse getDogByName(String name) {
-//
-//        return DogConvert.toResponse(dogRepository.findByName(name));
-//    }
-//
-//    public DogResponse getDogByColor(String color) {
-//        return DogConvert.toResponse(dogRepository.findByColor(color).get());
-//    }
-//
-//    public DogResponse getDogByGender(AnimalGender gender) {
-//        return DogConvert.toResponse(dogRepository.findByGender(gender).get());
-//    }
-//
-//    public DogResponse getDogBySize(DogSize size) {
-//        return DogConvert.toResponse(dogRepository.findBySize(size).get());
-//    }
-
-
     public DogResponse updateDog(Integer id, DogRequest dogRequest) {
         Dog existingDog = dogRepository.findDogById(id);
         if (existingDog == null) {
-            throw new IllegalArgumentException("Dog not found for ID: " + id);
+            throw new IllegalArgumentException ("Dog not found for ID: " + id);
         } else {
             existingDog = DogConvert.toEntity(dogRequest);
             existingDog.setId(id);

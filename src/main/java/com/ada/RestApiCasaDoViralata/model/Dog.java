@@ -37,11 +37,11 @@ public class Dog {
     @Column(name = "porte")
     private DogSize size;
 
-    public Dog(String name, String color, AnimalGender gender) {
-        this.name = name;
-        this.color = color;
-        this.gender = gender;
-    }
+//    public Dog(String name, String color, AnimalGender gender) {
+//        this.name = name;
+//        this.color = color;
+//        this.gender = gender;
+//    }
 }
 
 

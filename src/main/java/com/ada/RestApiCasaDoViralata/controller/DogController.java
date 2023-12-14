@@ -35,7 +35,7 @@ public class DogController {
     }
 
     @PostMapping
-    public ResponseEntity<DogResponse> saveDog(@RequestBody DogRequest dogRequest) {
+    public ResponseEntity<DogResponse> createDog(@RequestBody DogRequest dogRequest) {
         DogResponse dog = dogService.createDog(dogRequest);
         return ResponseEntity.created(URI.create("/dog/" + dog.getId())).body(dog);
 
