@@ -27,8 +27,8 @@ Link do repositório de testes End-to-End: [https://github.com/beatrizberto/API_
 
 
 ### Testes de Integração
-- UserControllerIntegrationTests: testa a integração do registro de usuários com o banco de dados;
-- DogControllerIntegrationTests: testa a integração do registro de cães com o banco de dados;
+- UserControllerIntegrationTests: testa a integração dos métodos de registro de user com a camada web;
+- DogControllerIntegrationTests: testa a integração dos métodos de registro de dog com a camada web;
 
 
 
