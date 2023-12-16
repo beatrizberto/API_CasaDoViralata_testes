@@ -57,7 +57,7 @@ public class UserServiceUnitTest {
 
         Assertions.assertEquals("Name", userResponse.getName());
         Assertions.assertEquals("name@email.com", userResponse.getEmail());
-       // Mockito.verify(passwordEncoder).encode("password");
+        // Mockito.verify(passwordEncoder).encode("password");
     }
 
     @Test
@@ -134,16 +134,14 @@ public class UserServiceUnitTest {
 
     @Test
     public void atualizar_usuario_com_sucesso() {
-        // Criação do objeto UserRequest
         UserRequest userRequest = new UserRequest("Name", "name@email.com", "password");
 
-        // Configuração do comportamento do mock do repositório
         Mockito.when(userRepository.save(any())).thenReturn(UserConvert.toEntity(userRequest));
 
-        // Chamada do método a ser testado
+
         UserResponse userResponse = userService.updateUser(1, userRequest);
 
-        // Verificações
+
         if (userResponse != null) {
             Assertions.assertEquals("Name", userResponse.getName());
             Assertions.assertEquals("name@email.com", userResponse.getEmail());
@@ -155,38 +153,37 @@ public class UserServiceUnitTest {
     }
 
 
-
     @Test
     public void deletar_usuario_desativa_atributo_active() {
-        // Dado um usuário existente com ID 1 e active=true
+
         User existingUser = new User(1, "User1", "user1@email.com", "encodedPassword", true);
         Mockito.when(userRepository.findById(1)).thenReturn(Optional.of(existingUser));
 
-        // Quando o método deleteUser é chamado
+
         userService.deleteUser(1);
 
-        // Então o método findById é chamado para obter o usuário existente
+
         Mockito.verify(userRepository).findById(1);
 
-        // E o atributo active do usuário é configurado como false
+
         Assertions.assertFalse(existingUser.isActive());
 
-        // E o método save do repositório é chamado para salvar as alterações
+
         Mockito.verify(userRepository).save(existingUser);
     }
 
     @Test
     public void deletar_usuario_que_nao_existe_dispara_excecao() {
-        // Dado um usuário com ID 1 que não existe no repositório
+
         Mockito.when(userRepository.findById(1)).thenReturn(Optional.empty());
 
-        // Quando o método deleteUser é chamado para um ID que não existe
+
         Assertions.assertThrows(NoSuchElementException.class, () -> userService.deleteUser(1));
 
-        // Então o método findById é chamado para obter o usuário (que não existe)
+
         Mockito.verify(userRepository).findById(1);
 
-        // E o método save do repositório não deve ser chamado, pois o usuário não existe
+
         Mockito.verify(userRepository, never()).save(any(User.class));
     }
 

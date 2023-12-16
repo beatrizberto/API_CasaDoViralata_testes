@@ -57,18 +57,6 @@ public class DogController {
         dogService.deleteDog(id);
     }
 
-//
-//    @GetMapping
-//    public List<DogResponse> getDog(
-//            @RequestParam(name = "dogId", required = false) Integer id,
-//            @RequestParam (name = "dogName", required = false) String name,
-//            @RequestParam (name = "dogColor", required = false) String color,
-//            @RequestParam (name = "dogGender", required = false) AnimalGender gender,
-//            @RequestParam (name = "dogSize", required = false) DogSize size
-//
-//            ){
-//        return dogService.getDogs();
-//    }
 
 
 }
