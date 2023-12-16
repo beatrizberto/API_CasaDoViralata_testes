@@ -5,8 +5,6 @@ import com.ada.RestApiCasaDoViralata.utils.DogSize;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter @Setter
 public class DogResponse {
     private Integer id;
